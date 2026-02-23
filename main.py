@@ -1,0 +1,18 @@
+from fastapi import FastAPI
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    env_str: str = "SERVER_HELLO"
+    
+settings = Settings()
+app = FastAPI()
+
+@app.get("/health-check")
+def read_item():
+    return {"Status": "ok"}
+
+@app.get("/hello-world")
+async def info():
+    return {
+        "text": settings.env_str,
+    }
