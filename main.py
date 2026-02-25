@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    env_str: str = "SERVER_HELLO"
+    SERVER_HELLO: str
     
 settings = Settings()
 app = FastAPI()
@@ -14,5 +14,5 @@ def read_item():
 @app.get("/hello-world")
 async def info():
     return {
-        "text": settings.env_str,
+        "text": settings.SERVER_HELLO,
     }
